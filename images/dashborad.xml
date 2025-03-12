@@ -1,0 +1,56 @@
+<dashboard version="1.1" theme="dark">
+  <label>SOC Dashboard monitoring internal system</label>
+  <description>this dashboard contains : attempt from other users to login to root account | detect successful SSH logins from different countries | # detect failed ssh login attempts (brute force)</description>
+  <row>
+    <panel>
+      <title>Data showing authentication failure or failed SU</title>
+      <event>
+        <title>table</title>
+        <search>
+          <query>index=* source="/var/log/auth.log" ("FAILED SU (to root)" OR "authentication failure") | rex field=_raw "user\s+(?&lt;user&gt;\S+)" | stats count by user</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="refresh.display">progressbar</option>
+      </event>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Attempt to login to root SSH (brute force)</title>
+      <table>
+        <search>
+          <query>index=* source="/var/log/auth.log" ("Failed password" AND "root")</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="drilldown">cell</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">true</option>
+        <option name="totalsRow">true</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>most logged-in users</title>
+      <table>
+        <search>
+          <query>index=* source="/var/log/auth.log" "session opened" | rex field=_raw "user\s+(?&lt;user&gt;\S+)"| stats count by user | sort - count</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+</dashboard>
