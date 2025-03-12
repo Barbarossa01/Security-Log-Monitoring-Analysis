@@ -1,4 +1,4 @@
-# SOC Dashboard for Splunk
+# Security Log Monitorying Analysis using Splunk
 
 This project demonstrates a Security Operations Center (SOC) dashboard created using **Splunk** to monitor and analyze internal system security events, such as authentication failures, brute force login attempts on SSH, and the most frequently logged-in users.
 
@@ -36,6 +36,22 @@ This project demonstrates a Security Operations Center (SOC) dashboard created u
   - User login statistics to identify abnormal behavior.
 
 ## Screenshots
-![Authentication Failures Dashboard](images/auth-failures.png)
-![SSH Brute Force Detection](images/ssh-attack.png)
+<br><img src="https://github.com/Barbarossa01/Security-Log-Monitoring-Analysis/blob/main/images/1.png" alt="dashboard1">
+<br><img src="https://github.com/Barbarossa01/Security-Log-Monitoring-Analysis/blob/main/images/2.PNG" alt="dashboard2">
 
+## Used SPL in the dashbiard
+<br><img src="https://github.com/Barbarossa01/Security-Log-Monitoring-Analysis/blob/main/images/SPL1.PNG" alt="SPL1.PNG">
+- index=* :  index where the search should look for data
+- ("FAILED SU (to root)" OR "authentication failure") : search filter that looks for specific strings in the logs
+- | rex field=_raw "user\s+(?<user>\S+)" : regular expression (regex) extraction from the raw log data. It is used to extract values from your logs based on a pattern.
+
+<br><img src="https://github.com/Barbarossa01/Security-Log-Monitoring-Analysis/blob/main/images/SPL2.PNG" alt="SPL2.PNG">
+- This SPL query designed to detect failed SSH login attempts specifically targeting the root user
+- ("Failed password" AND "root") : This filter looks for both "Failed password" and "root" in the log messages.
+
+<br><img src="https://github.com/Barbarossa01/Security-Log-Monitoring-Analysis/blob/main/images/SPL3.PNG" alt="SPL3.PNG">
+
+##  Audit Trail : a detailed, chronological record of events and actions performed within the system
+<br><img src="https://github.com/Barbarossa01/Security-Log-Monitoring-Analysis/blob/main/images/trail0.PNG" alt="trail0.PNG">
+<br><img src="https://github.com/Barbarossa01/Security-Log-Monitoring-Analysis/blob/main/images/trail1.PNG" alt="trail1.PNG">
+<br><img src="https://github.com/Barbarossa01/Security-Log-Monitoring-Analysis/blob/main/images/trail2.PNG" alt="trail2.PNG">
