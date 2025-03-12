@@ -1,4 +1,4 @@
-# Security Log Monitorying Analysis using Splunk
+# Security Log Monitoring Analysis using Splunk
 
 This project demonstrates a Security Operations Center (SOC) dashboard created using **Splunk** to monitor and analyze internal system security events, such as authentication failures, brute force login attempts on SSH, and the most frequently logged-in users.
 
