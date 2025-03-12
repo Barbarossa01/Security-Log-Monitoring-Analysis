@@ -39,8 +39,3 @@ This project demonstrates a Security Operations Center (SOC) dashboard created u
 ![Authentication Failures Dashboard](images/auth-failures.png)
 ![SSH Brute Force Detection](images/ssh-attack.png)
 
-## Contributions
-Contributions to improve the dashboard or the detection queries are welcome! Please fork the repository, make your changes, and submit a pull request.
-
-## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
